@@ -1,4 +1,4 @@
-import { Container, Flex, Heading } from '@chakra-ui/react';
+import cx from 'classnames';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { MdSearch } from 'react-icons/md';
@@ -15,65 +15,46 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div>
-      <Flex
-        shadow={y > 50 ? 'sm' : undefined}
-        as="header"
-        px={10}
-        py={15}
-        position="fixed"
-        bg="white"
-        w="full"
-        justify={{ base: 'center', sm: 'center', md: 'space-between' }}
-        alignItems="center"
-        zIndex={10}
+      <header
+        className={cx(
+          'flex justify-center items-center fixed px-10 py-6 bg-white w-full z-10 md:justify-between top-0',
+          {
+            shadow: y > 50,
+          },
+        )}
       >
-        <Heading as="h2" size="xl" fontWeight="thin">
-          רימצ׳ינטה
-        </Heading>
-        <Flex as="nav" gap={5} alignItems="center" display={{ base: 'none', md: 'flex' }}>
+        <Link href={'/'}>
+          <h2 className="text-xl font-thin">רימצ׳ינטה</h2>
+        </Link>
+        <nav className="hidden gap-5 items-center md:flex">
           {ROUTES.map(({ title, href }) => {
             return (
-              <Flex
+              <div
                 key={href}
-                borderBottom="1px solid transparent"
-                _hover={{ borderBottom: '1px solid' }}
-                py={1}
+                className="py-1 border-b border-transparent hover:border-b hover:border-gray-600"
               >
                 <Link href={href}>{title}</Link>
-              </Flex>
+              </div>
             );
           })}
-        </Flex>
-        <Flex cursor="pointer" display={{ base: 'none', md: 'flex' }}>
+        </nav>
+        <div className="hidden cursor-pointer md:flex">
           <MdSearch />
-        </Flex>
-      </Flex>
-      <Container maxW="container.sm" py={{ base: 20, md: 32 }} minHeight={'100vh'}>
-        {children}
-      </Container>
-      <Flex
-        display={{ base: 'flex', md: 'none' }}
-        position="fixed"
-        bottom={0}
-        right={0}
-        p={4}
-        w="full"
-        bg="white"
-        justifyContent="space-around"
-      >
+        </div>
+      </header>
+      <div className="min-h-screen py-20 md:py-14">{children}</div>
+      <div className="flex fixed bottom-0 right-0 p-4 w-full bg-white justify-around md:hidden">
         {ROUTES.map(({ title, href }) => {
           return (
-            <Flex
+            <div
+              className="py-1 border-b border-transparent hover:border-b hover:border-gray-600"
               key={href}
-              borderBottom="1px solid transparent"
-              _hover={{ borderBottom: '1px solid' }}
-              py={1}
             >
               <Link href={href}>{title}</Link>
-            </Flex>
+            </div>
           );
         })}
-      </Flex>
+      </div>
     </div>
   );
 };

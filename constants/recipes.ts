@@ -13,7 +13,7 @@ export const RecipesRoutes: RecipeItem[] = [
   {
     title: 'בצק סמולינה',
     image: dough,
-    href: '/recipes/semolina',
+    href: '/recipes/semolina-dough',
     summary:
       'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית הועניב היושבב שערש שמחויט - שלושע ותלברו חשלו שעותלשך וחאית נובש ערששף. זותה מנק הבקיץ אפא',
   },
